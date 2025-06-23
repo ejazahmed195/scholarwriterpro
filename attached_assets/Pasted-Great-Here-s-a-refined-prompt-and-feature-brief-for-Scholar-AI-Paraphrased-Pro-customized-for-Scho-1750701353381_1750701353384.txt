@@ -1,0 +1,127 @@
+Great! Here's a refined prompt and feature brief for Scholar AI Paraphrased Pro, customized for ScholarWriter.com using Gemini API:
+
+
+---
+
+🔷 Title: Scholar AI Paraphrased Pro
+
+🔍 Purpose:
+
+An advanced paraphrasing tool built for academic and professional writing, directly integrated with ScholarWriter.com, using Gemini API.
+
+
+---
+
+✅ Core Features:
+
+1. Paraphrasing Modes:
+
+Academic
+
+Formal
+
+Creative
+
+SEO-Optimized
+
+Simplify (Beginner-friendly tone)
+
+
+
+2. AI-Powered Contextual Rewriting:
+
+Goes beyond synonyms — restructures sentences based on real-world context and meaning.
+
+
+
+3. Color-Coded Edit Visualization:
+
+Blue: Synonym changes
+
+Green: Grammar enhancements
+
+Yellow: Tone or structure shifts
+
+
+
+4. Style Matching Engine:
+
+Users can upload a writing sample to adapt the paraphrased output’s tone to match their personal style.
+
+
+
+5. Multilingual Rewriting Support:
+
+Detect and paraphrase content in English, Spanish, French, German, Urdu, and more.
+
+
+
+6. Citation Integrity:
+
+Maintains in-text citations (APA, MLA, Chicago) during rephrasing.
+
+
+
+7. Auto-Cleanup for Uploaded Files:
+
+If a user leaves the page or session times out, the backend automatically deletes any uploaded content (e.g., PDF, DOCX, TXT) to optimize storage and preserve user privacy.
+
+
+
+8. Responsive, Clean UI:
+
+Built with React + Tailwind, matching the ScholarWriter.com color cladding.
+
+Light/Dark mode toggle to reduce eye strain.
+
+
+
+9. Gemini API Integration:
+
+All paraphrasing and NLP tasks handled via Google Gemini API for speed, accuracy, and efficiency.
+
+
+
+
+
+---
+
+⚙️ Backend Stack:
+
+Framework: FastAPI or Flask
+
+AI Engine: Gemini API
+
+Storage: Temporary file storage with cleanup hooks
+
+Security: End-to-end encryption for file uploads
+
+
+
+---
+
+🧠 Next Step Options:
+
+Full React frontend UI mockup
+
+FastAPI backend with Gemini API integration
+
+Auto-cleanup system with WebSocket or session-tracking
+
+Full-stack deployment on Replit, Railway, or Vercel/Render
+
+
+Would you like to start with:
+
+1. UI wireframe and color layout for ScholarWriter,
+
+
+2. Backend Gemini integration, or
+
+
+3. File auto-delete logic + session control?
+
+
+
+Let me know and I’ll build the next piece right away.
+
