@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { apiRequest } from "@/lib/queryClient";
 import type { ParaphraseRequest } from "@shared/schema";
@@ -101,6 +101,39 @@ export function useParaphraser() {
       setResult(null);
     }
   }, [currentSessionId, clearSessionMutation]);
+
+  // Cleanup session when user leaves the page
+  useEffect(() => {
+    const handleBeforeUnload = async () => {
+      if (currentSessionId) {
+        // Use sendBeacon for reliable cleanup on page unload
+        navigator.sendBeacon(`/api/session/${currentSessionId}/cleanup`, '');
+      }
+    };
+
+    const handleVisibilityChange = async () => {
+      if (document.visibilityState === 'hidden' && currentSessionId) {
+        // Cleanup when page becomes hidden (mobile/tab switch)
+        try {
+          await fetch(`/api/session/${currentSessionId}/cleanup`, {
+            method: 'POST',
+            credentials: 'include',
+            keepalive: true
+          });
+        } catch (error) {
+          console.log('Cleanup request failed:', error);
+        }
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+    };
+  }, [currentSessionId]);
 
   return {
     paraphrase,

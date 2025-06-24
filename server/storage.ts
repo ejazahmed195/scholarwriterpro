@@ -1,4 +1,6 @@
 import { users, paraphrasingSessions, uploadedFiles, type User, type InsertUser, type ParaphrasingSession, type InsertParaphrasingSession, type UploadedFile, type InsertUploadedFile } from "@shared/schema";
+import { db } from "./db";
+import { eq, lt } from "drizzle-orm";
 
 export interface IStorage {
   getUser(id: number): Promise<User | undefined>;
@@ -15,115 +17,141 @@ export interface IStorage {
   deleteFilesBySession(sessionId: string): Promise<void>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<number, User>;
-  private paraphrasingSessions: Map<string, ParaphrasingSession>;
-  private uploadedFiles: Map<number, UploadedFile>;
-  private currentUserId: number;
-  private currentSessionId: number;
-  private currentFileId: number;
-
+export class DatabaseStorage implements IStorage {
   constructor() {
-    this.users = new Map();
-    this.paraphrasingSessions = new Map();
-    this.uploadedFiles = new Map();
-    this.currentUserId = 1;
-    this.currentSessionId = 1;
-    this.currentFileId = 1;
-    
-    // Start cleanup interval
+    // Start cleanup interval - run every 5 minutes
     setInterval(() => {
       this.deleteExpiredFiles();
-    }, 60000); // Run every minute
+    }, 5 * 60 * 1000);
+    
+    // Start cache cleanup - run every 30 minutes to optimize space
+    setInterval(() => {
+      this.optimizeDatabase();
+    }, 30 * 60 * 1000);
   }
 
   async getUser(id: number): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = this.currentUserId++;
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
   async createParaphrasingSession(session: InsertParaphrasingSession): Promise<ParaphrasingSession> {
-    const id = this.currentSessionId++;
-    const newSession: ParaphrasingSession = {
-      ...session,
-      id,
-      createdAt: new Date(),
-    };
-    this.paraphrasingSessions.set(session.sessionId, newSession);
+    const [newSession] = await db
+      .insert(paraphrasingSessions)
+      .values(session)
+      .returning();
     return newSession;
   }
 
   async getParaphrasingSession(sessionId: string): Promise<ParaphrasingSession | undefined> {
-    return this.paraphrasingSessions.get(sessionId);
+    const [session] = await db
+      .select()
+      .from(paraphrasingSessions)
+      .where(eq(paraphrasingSessions.sessionId, sessionId));
+    return session || undefined;
   }
 
   async updateParaphrasingSession(sessionId: string, updates: Partial<ParaphrasingSession>): Promise<ParaphrasingSession | undefined> {
-    const session = this.paraphrasingSessions.get(sessionId);
-    if (!session) return undefined;
-    
-    const updatedSession = { ...session, ...updates };
-    this.paraphrasingSessions.set(sessionId, updatedSession);
-    return updatedSession;
+    const [updatedSession] = await db
+      .update(paraphrasingSessions)
+      .set(updates)
+      .where(eq(paraphrasingSessions.sessionId, sessionId))
+      .returning();
+    return updatedSession || undefined;
   }
 
   async createUploadedFile(file: InsertUploadedFile): Promise<UploadedFile> {
-    const id = this.currentFileId++;
-    const newFile: UploadedFile = {
-      ...file,
-      id,
-      uploadedAt: new Date(),
-    };
-    this.uploadedFiles.set(id, newFile);
+    const [newFile] = await db
+      .insert(uploadedFiles)
+      .values(file)
+      .returning();
     return newFile;
   }
 
   async getUploadedFilesBySession(sessionId: string): Promise<UploadedFile[]> {
-    return Array.from(this.uploadedFiles.values()).filter(
-      (file) => file.sessionId === sessionId
-    );
+    const files = await db
+      .select()
+      .from(uploadedFiles)
+      .where(eq(uploadedFiles.sessionId, sessionId));
+    return files;
   }
 
   async deleteExpiredFiles(): Promise<void> {
     const now = new Date();
-    const expiredFiles = Array.from(this.uploadedFiles.entries()).filter(
-      ([_, file]) => file.expiresAt < now
-    );
     
-    for (const [id, _] of expiredFiles) {
-      this.uploadedFiles.delete(id);
-    }
-    
-    // Also clean up expired sessions
-    const expiredSessions = Array.from(this.paraphrasingSessions.entries()).filter(
-      ([_, session]) => session.expiresAt < now
-    );
-    
-    for (const [sessionId, _] of expiredSessions) {
-      this.paraphrasingSessions.delete(sessionId);
+    try {
+      // Delete expired uploaded files
+      await db
+        .delete(uploadedFiles)
+        .where(lt(uploadedFiles.expiresAt, now));
+      
+      // Delete expired paraphrasing sessions
+      await db
+        .delete(paraphrasingSessions)
+        .where(lt(paraphrasingSessions.expiresAt, now));
+      
+      console.log('Cleanup: Expired files and sessions deleted');
+    } catch (error) {
+      console.error('Error during cleanup:', error);
     }
   }
 
   async deleteFilesBySession(sessionId: string): Promise<void> {
-    const sessionFiles = Array.from(this.uploadedFiles.entries()).filter(
-      ([_, file]) => file.sessionId === sessionId
-    );
-    
-    for (const [id, _] of sessionFiles) {
-      this.uploadedFiles.delete(id);
+    await db
+      .delete(uploadedFiles)
+      .where(eq(uploadedFiles.sessionId, sessionId));
+  }
+
+  // Cache optimization to save database space
+  async optimizeDatabase(): Promise<void> {
+    try {
+      // Delete sessions older than 24 hours regardless of expiry
+      const oneDayAgo = new Date();
+      oneDayAgo.setHours(oneDayAgo.getHours() - 24);
+      
+      await db
+        .delete(paraphrasingSessions)
+        .where(lt(paraphrasingSessions.createdAt, oneDayAgo));
+      
+      await db
+        .delete(uploadedFiles)
+        .where(lt(uploadedFiles.uploadedAt, oneDayAgo));
+      
+      console.log('Database optimization: Old records cleaned up');
+    } catch (error) {
+      console.error('Error during database optimization:', error);
+    }
+  }
+
+  // Method to delete user data when they leave the page
+  async deleteUserSession(sessionId: string): Promise<void> {
+    try {
+      // Delete all files associated with the session
+      await this.deleteFilesBySession(sessionId);
+      
+      // Delete the paraphrasing session
+      await db
+        .delete(paraphrasingSessions)
+        .where(eq(paraphrasingSessions.sessionId, sessionId));
+      
+      console.log(`User session ${sessionId} data deleted`);
+    } catch (error) {
+      console.error('Error deleting user session:', error);
     }
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();

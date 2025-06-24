@@ -165,19 +165,42 @@ export async function registerRoutes(app: Express): Promise<Server> {
     try {
       const { sessionId } = req.params;
       
-      // Delete associated files
+      // Delete associated files from filesystem
       const files = await storage.getUploadedFilesBySession(sessionId);
       for (const file of files) {
         await cleanupFile(file.filePath);
       }
       
-      await storage.deleteFilesBySession(sessionId);
+      // Delete from database (includes files and session)
+      await (storage as any).deleteUserSession(sessionId);
       
       res.json({ message: "Session cleared successfully" });
       
     } catch (error) {
       console.error("Clear session error:", error);
       res.status(500).json({ message: "Failed to clear session" });
+    }
+  });
+
+  // Endpoint for when user leaves the page (beforeunload)
+  app.post("/api/session/:sessionId/cleanup", async (req, res) => {
+    try {
+      const { sessionId } = req.params;
+      
+      // Delete associated files from filesystem
+      const files = await storage.getUploadedFilesBySession(sessionId);
+      for (const file of files) {
+        await cleanupFile(file.filePath);
+      }
+      
+      // Delete user session data from database
+      await (storage as any).deleteUserSession(sessionId);
+      
+      res.json({ message: "User session cleaned up successfully" });
+      
+    } catch (error) {
+      console.error("Session cleanup error:", error);
+      res.status(500).json({ message: "Failed to cleanup session" });
     }
   });
 

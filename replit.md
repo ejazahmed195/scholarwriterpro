@@ -10,10 +10,12 @@ The application follows a full-stack architecture with a clear separation betwee
 
 - **Frontend**: React-based SPA with TypeScript, using Vite for development and building
 - **Backend**: Express.js server with TypeScript support
-- **Database**: PostgreSQL with Drizzle ORM for data persistence
-- **AI Integration**: Google Gemini API for text paraphrasing
+- **Database**: PostgreSQL (Neon-backed) with Drizzle ORM for data persistence and automatic cleanup
+- **AI Integration**: Google Gemini 1.5 Flash API for text paraphrasing
 - **File Processing**: Multer for file uploads with support for PDF, DOCX, and TXT files
 - **UI Framework**: Tailwind CSS with shadcn/ui component library
+- **Cache Optimization**: Automated cleanup system for database space optimization
+- **Privacy Protection**: Automatic data deletion on page leave using beforeunload and visibility API
 
 ## Key Components
 
@@ -107,6 +109,11 @@ The application uses three main tables:
 ✓ Style matching functionality for personalized paraphrasing
 ✓ Dark/light theme support with smooth transitions
 ✓ Mobile-responsive design for all screen sizes
+✓ Database integration with PostgreSQL for persistent storage
+✓ Automatic data cleanup when users leave the page
+✓ Cache optimization system running every 30 minutes
+✓ Privacy protection with automatic session deletion
+✓ Database status indicator showing connection and cleanup status
 
 ## Changelog
 

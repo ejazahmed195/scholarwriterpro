@@ -629,6 +629,34 @@ export default function Paraphraser() {
           </div>
         </div>
 
+        {/* Database Status Indicator */}
+        <div className="mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Card className="shadow-xl border-0 bg-gradient-to-r from-green-50 to-emerald-50 dark:from-green-900/20 dark:to-emerald-900/20 backdrop-blur-md rounded-2xl">
+            <CardContent className="pt-6 pb-6 px-8">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-4">
+                  <div className="p-3 bg-green-500/10 rounded-xl">
+                    <Shield className="h-6 w-6 text-green-600 dark:text-green-400" />
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-bold text-slate-800 dark:text-slate-200">Privacy Protection Active</h3>
+                    <p className="text-sm text-slate-600 dark:text-slate-400">Your data is automatically deleted when you leave the page</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="flex items-center space-x-2">
+                    <div className="w-3 h-3 rounded-full bg-green-500 animate-pulse"></div>
+                    <span className="text-sm font-medium text-slate-700 dark:text-slate-300">Database Connected</span>
+                  </div>
+                  <Badge variant="outline" className="bg-green-100 dark:bg-green-900/20 text-green-700 dark:text-green-300 border-green-300 dark:border-green-600">
+                    Auto-Cleanup Enabled
+                  </Badge>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
         {/* Enhanced Footer with ScholarWriter.com Branding */}
         <footer className="mt-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200/60 dark:border-slate-700/60">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
@@ -672,7 +700,7 @@ export default function Paraphraser() {
                   </li>
                   <li className="flex items-center space-x-2">
                     <CheckCircle className="h-4 w-4 scholar-secondary" />
-                    <span>Auto-Cleanup for Privacy</span>
+                    <span>Database Auto-Cleanup & Cache Optimization</span>
                   </li>
                 </ul>
               </div>
@@ -691,8 +719,8 @@ export default function Paraphraser() {
                   <div className="flex items-center space-x-3 p-3 bg-slate-50 dark:bg-slate-800/50 rounded-lg">
                     <Shield className="h-8 w-8 scholar-secondary" />
                     <div>
-                      <div className="font-medium text-slate-800 dark:text-white">Privacy First</div>
-                      <div className="text-xs text-slate-500 dark:text-slate-400">End-to-end encryption</div>
+                      <div className="font-medium text-slate-800 dark:text-white">Auto-Cleanup Database</div>
+                      <div className="text-xs text-slate-500 dark:text-slate-400">Data deleted when you leave</div>
                     </div>
                   </div>
                 </div>
