@@ -67,7 +67,7 @@ Change types:
 - "tone": Changes in writing style, formality, or voice`;
 
     const response = await ai.models.generateContent({
-      model: "gemini-2.5-pro",
+      model: "gemini-1.5-flash",
       config: {
         systemInstruction: systemPrompt,
         responseMimeType: "application/json",

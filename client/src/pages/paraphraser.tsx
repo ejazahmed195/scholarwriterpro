@@ -219,60 +219,64 @@ export default function Paraphraser() {
         </div>
       </header>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-10">
           
           {/* Enhanced Sidebar Settings */}
           <div className="lg:col-span-1">
-            <Card className="sticky top-24 shadow-lg border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
-              <CardHeader className="pb-4">
-                <CardTitle className="text-lg flex items-center space-x-2">
-                  <Bot className="h-5 w-5 scholar-primary" />
-                  <span>AI Settings</span>
+            <Card className="sticky top-28 shadow-xl border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md rounded-2xl">
+              <CardHeader className="pb-6 px-6 pt-6">
+                <CardTitle className="text-xl flex items-center space-x-3">
+                  <div className="p-2 bg-scholar-primary/10 rounded-lg">
+                    <Bot className="h-6 w-6 scholar-primary" />
+                  </div>
+                  <span className="font-bold">AI Settings</span>
                 </CardTitle>
-                <p className="text-sm text-slate-600 dark:text-slate-400">Customize your paraphrasing experience</p>
+                <p className="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed">Customize your paraphrasing experience with advanced options</p>
               </CardHeader>
-              <CardContent className="space-y-6">
+              <CardContent className="space-y-8 px-6 pb-8">
                 {/* Enhanced Paraphrasing Modes */}
                 <div>
-                  <Label className="text-sm font-medium mb-4 block flex items-center space-x-2">
-                    <Sparkles className="h-4 w-4 scholar-primary" />
+                  <Label className="text-sm font-semibold mb-6 block flex items-center space-x-3">
+                    <div className="p-1.5 bg-scholar-primary/10 rounded-md">
+                      <Sparkles className="h-4 w-4 scholar-primary" />
+                    </div>
                     <span>Writing Mode</span>
                   </Label>
-                  <RadioGroup value={mode} onValueChange={(value) => setMode(value as typeof mode)} className="space-y-3">
-                    <div className="flex items-center space-x-3 p-3 rounded-lg border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                  <RadioGroup value={mode} onValueChange={(value) => setMode(value as typeof mode)} className="space-y-4">
+                    <div className="flex items-center space-x-4 p-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:border-scholar-primary/30 transition-all duration-200">
                       <RadioGroupItem value="academic" id="academic" className="scholar-primary" />
                       <div className="flex-1">
-                        <Label htmlFor="academic" className="text-sm font-medium cursor-pointer">Academic</Label>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">Scholarly tone with formal language</p>
+                        <Label htmlFor="academic" className="text-sm font-semibold cursor-pointer text-slate-800 dark:text-slate-200">Academic</Label>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Scholarly tone with formal language</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-3 p-3 rounded-lg border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                    <div className="flex items-center space-x-4 p-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:border-scholar-primary/30 transition-all duration-200">
                       <RadioGroupItem value="formal" id="formal" className="scholar-primary" />
                       <div className="flex-1">
-                        <Label htmlFor="formal" className="text-sm font-medium cursor-pointer">Formal</Label>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">Professional business writing</p>
+                        <Label htmlFor="formal" className="text-sm font-semibold cursor-pointer text-slate-800 dark:text-slate-200">Formal</Label>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Professional business writing</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-3 p-3 rounded-lg border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                    <div className="flex items-center space-x-4 p-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:border-scholar-primary/30 transition-all duration-200">
                       <RadioGroupItem value="creative" id="creative" className="scholar-primary" />
                       <div className="flex-1">
-                        <Label htmlFor="creative" className="text-sm font-medium cursor-pointer">Creative</Label>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">Engaging and expressive style</p>
+                        <Label htmlFor="creative" className="text-sm font-semibold cursor-pointer text-slate-800 dark:text-slate-200">Creative</Label>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Engaging and expressive style</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-3 p-3 rounded-lg border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                    <div className="flex items-center space-x-4 p-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:border-scholar-primary/30 transition-all duration-200">
                       <RadioGroupItem value="seo" id="seo" className="scholar-primary" />
                       <div className="flex-1">
-                        <Label htmlFor="seo" className="text-sm font-medium cursor-pointer">SEO-Optimized</Label>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">Search engine friendly content</p>
+                        <Label htmlFor="seo" className="text-sm font-semibold cursor-pointer text-slate-800 dark:text-slate-200">SEO-Optimized</Label>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Search engine friendly content</p>
                       </div>
                     </div>
-                    <div className="flex items-center space-x-3 p-3 rounded-lg border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50 transition-colors">
+                    <div className="flex items-center space-x-4 p-4 rounded-xl border border-slate-200 dark:border-slate-600 hover:bg-slate-50 dark:hover:bg-slate-700/50 hover:border-scholar-primary/30 transition-all duration-200">
                       <RadioGroupItem value="simplify" id="simplify" className="scholar-primary" />
                       <div className="flex-1">
-                        <Label htmlFor="simplify" className="text-sm font-medium cursor-pointer">Simplify</Label>
-                        <p className="text-xs text-slate-500 dark:text-slate-400">Easy-to-understand language</p>
+                        <Label htmlFor="simplify" className="text-sm font-semibold cursor-pointer text-slate-800 dark:text-slate-200">Simplify</Label>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Easy-to-understand language</p>
                       </div>
                     </div>
                   </RadioGroup>
@@ -280,15 +284,17 @@ export default function Paraphraser() {
 
                 {/* Enhanced Language Selection */}
                 <div>
-                  <Label className="text-sm font-medium mb-3 block flex items-center space-x-2">
-                    <Globe className="h-4 w-4 scholar-primary" />
+                  <Label className="text-sm font-semibold mb-4 block flex items-center space-x-3">
+                    <div className="p-1.5 bg-scholar-primary/10 rounded-md">
+                      <Globe className="h-4 w-4 scholar-primary" />
+                    </div>
                     <span>Language</span>
                   </Label>
                   <Select value={language} onValueChange={setLanguage}>
-                    <SelectTrigger className="bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600">
+                    <SelectTrigger className="h-12 bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 rounded-xl hover:border-scholar-primary/30 transition-colors">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="rounded-xl">
                       <SelectItem value="English">🇺🇸 English</SelectItem>
                       <SelectItem value="Spanish">🇪🇸 Spanish</SelectItem>
                       <SelectItem value="French">🇫🇷 French</SelectItem>
@@ -300,15 +306,17 @@ export default function Paraphraser() {
 
                 {/* Enhanced Citation Format */}
                 <div>
-                  <Label className="text-sm font-medium mb-3 block flex items-center space-x-2">
-                    <FileText className="h-4 w-4 scholar-primary" />
+                  <Label className="text-sm font-semibold mb-4 block flex items-center space-x-3">
+                    <div className="p-1.5 bg-scholar-primary/10 rounded-md">
+                      <FileText className="h-4 w-4 scholar-primary" />
+                    </div>
                     <span>Citation Format</span>
                   </Label>
                   <Select value={citationFormat} onValueChange={(value) => setCitationFormat(value as typeof citationFormat)}>
-                    <SelectTrigger className="bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600">
+                    <SelectTrigger className="h-12 bg-white dark:bg-slate-700 border-slate-200 dark:border-slate-600 rounded-xl hover:border-scholar-primary/30 transition-colors">
                       <SelectValue />
                     </SelectTrigger>
-                    <SelectContent>
+                    <SelectContent className="rounded-xl">
                       <SelectItem value="APA">APA Style</SelectItem>
                       <SelectItem value="MLA">MLA Format</SelectItem>
                       <SelectItem value="Chicago">Chicago Manual</SelectItem>
@@ -317,19 +325,23 @@ export default function Paraphraser() {
                 </div>
 
                 {/* Enhanced Style Matching Toggle */}
-                <div className="flex items-center justify-between p-4 bg-slate-50 dark:bg-slate-700/50 rounded-lg border border-slate-200 dark:border-slate-600">
-                  <div className="flex items-center space-x-2">
-                    <Star className="h-4 w-4 scholar-accent" />
-                    <div>
-                      <Label className="text-sm font-medium">Style Matching</Label>
-                      <p className="text-xs text-slate-500 dark:text-slate-400">Adapt to your writing style</p>
+                <div className="p-5 bg-gradient-to-r from-slate-50 to-blue-50 dark:from-slate-700/50 dark:to-slate-600/50 rounded-xl border border-slate-200 dark:border-slate-600">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <div className="p-1.5 bg-scholar-accent/10 rounded-md">
+                        <Star className="h-4 w-4 scholar-accent" />
+                      </div>
+                      <div>
+                        <Label className="text-sm font-semibold text-slate-800 dark:text-slate-200">Style Matching</Label>
+                        <p className="text-xs text-slate-500 dark:text-slate-400 mt-1">Adapt to your writing style</p>
+                      </div>
                     </div>
+                    <Switch
+                      checked={styleMatching}
+                      onCheckedChange={setStyleMatching}
+                      className="data-[state=checked]:bg-scholar-primary"
+                    />
                   </div>
-                  <Switch
-                    checked={styleMatching}
-                    onCheckedChange={setStyleMatching}
-                    className="data-[state=checked]:bg-scholar-primary"
-                  />
                 </div>
 
                 {/* Enhanced Color Legend */}
@@ -369,27 +381,29 @@ export default function Paraphraser() {
           {/* Enhanced Main Content Area */}
           <div className="lg:col-span-3">
             {/* Enhanced File Upload Section */}
-            <Card className="mb-8 shadow-lg border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
-              <CardHeader className="pb-4">
+            <Card className="mb-10 shadow-xl border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md rounded-2xl">
+              <CardHeader className="pb-6 px-8 pt-8">
                 <div className="flex flex-row items-center justify-between">
-                  <CardTitle className="text-xl flex items-center space-x-3">
-                    <CloudUpload className="h-6 w-6 scholar-primary" />
-                    <span>Document Upload</span>
+                  <CardTitle className="text-2xl flex items-center space-x-4">
+                    <div className="p-3 bg-scholar-primary/10 rounded-xl">
+                      <CloudUpload className="h-7 w-7 scholar-primary" />
+                    </div>
+                    <span className="font-bold">Document Upload</span>
                   </CardTitle>
-                  <div className="flex items-center space-x-3">
-                    <Badge variant="outline" className="text-xs">
+                  <div className="flex items-center space-x-4">
+                    <Badge variant="outline" className="text-xs px-3 py-1">
                       <Zap className="w-3 h-3 mr-1" />
                       Auto-cleanup
                     </Badge>
-                    <span className="text-xs text-slate-500 dark:text-slate-400">PDF, DOCX, TXT • 10MB max</span>
+                    <span className="text-sm text-slate-500 dark:text-slate-400">PDF, DOCX, TXT • 10MB max</span>
                   </div>
                 </div>
-                <p className="text-sm text-slate-600 dark:text-slate-400 mt-2">
-                  Upload documents to extract text automatically. Files are securely processed and automatically deleted after 2 hours.
+                <p className="text-base text-slate-600 dark:text-slate-400 mt-4 leading-relaxed">
+                  Upload documents to extract text automatically. Files are securely processed and automatically deleted after 2 hours for privacy protection.
                 </p>
               </CardHeader>
-              <CardContent>
-                <div className="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-xl p-12 text-center hover:border-scholar-primary dark:hover:border-scholar-primary transition-all duration-300 cursor-pointer group bg-gradient-to-br from-slate-50/50 to-blue-50/50 dark:from-slate-800/50 dark:to-slate-700/50">
+              <CardContent className="px-8 pb-8">
+                <div className="border-2 border-dashed border-slate-300 dark:border-slate-600 rounded-2xl p-16 text-center hover:border-scholar-primary dark:hover:border-scholar-primary transition-all duration-300 cursor-pointer group bg-gradient-to-br from-slate-50/80 to-blue-50/80 dark:from-slate-800/50 dark:to-slate-700/50">
                   <input
                     type="file"
                     id="fileUpload"
@@ -397,28 +411,28 @@ export default function Paraphraser() {
                     accept=".pdf,.docx,.txt"
                     onChange={handleFileUpload}
                   />
-                  <div className="space-y-4">
-                    <CloudUpload className="mx-auto h-16 w-16 text-slate-400 dark:text-slate-500 group-hover:text-scholar-primary group-hover:scale-110 transition-all duration-300" />
+                  <div className="space-y-6">
+                    <CloudUpload className="mx-auto h-20 w-20 text-slate-400 dark:text-slate-500 group-hover:text-scholar-primary group-hover:scale-110 transition-all duration-300" />
                     <div>
-                      <p className="text-lg font-medium text-slate-700 dark:text-slate-300 mb-2">Drop your documents here</p>
-                      <p className="text-sm text-slate-500 dark:text-slate-500 mb-6">or click to browse and select files</p>
+                      <p className="text-xl font-semibold text-slate-700 dark:text-slate-300 mb-3">Drop your documents here</p>
+                      <p className="text-base text-slate-500 dark:text-slate-500 mb-8">or click to browse and select files</p>
                     </div>
                     <Button
                       onClick={() => document.getElementById('fileUpload')?.click()}
-                      className="scholar-gradient text-white font-semibold px-8 py-3 rounded-lg hover:shadow-lg transition-all duration-300"
+                      className="scholar-gradient text-white font-semibold px-10 py-4 rounded-xl hover:shadow-xl transition-all duration-300"
                       disabled={uploadProgress > 0 && uploadProgress < 100}
                       size="lg"
                     >
                       {uploadProgress > 0 && uploadProgress < 100 ? (
                         <>
-                          <div className="flex items-center space-x-2">
-                            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                          <div className="flex items-center space-x-3">
+                            <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
                             <span>Uploading... {uploadProgress}%</span>
                           </div>
                         </>
                       ) : (
                         <>
-                          <CloudUpload className="w-5 h-5 mr-2" />
+                          <CloudUpload className="w-6 h-6 mr-3" />
                           Browse Files
                         </>
                       )}
@@ -429,17 +443,19 @@ export default function Paraphraser() {
             </Card>
 
             {/* Enhanced Text Processing Area */}
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               {/* Enhanced Input Area */}
-              <Card className="shadow-lg border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
-                <CardHeader className="pb-4">
+              <Card className="shadow-xl border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md rounded-2xl">
+                <CardHeader className="pb-6 px-8 pt-8">
                   <div className="flex flex-row items-center justify-between">
-                    <CardTitle className="text-lg flex items-center space-x-2">
-                      <FileText className="h-5 w-5 scholar-primary" />
-                      <span>Original Text</span>
+                    <CardTitle className="text-xl flex items-center space-x-3">
+                      <div className="p-2 bg-scholar-primary/10 rounded-lg">
+                        <FileText className="h-6 w-6 scholar-primary" />
+                      </div>
+                      <span className="font-bold">Original Text</span>
                     </CardTitle>
                     <div className="flex items-center space-x-3">
-                      <Badge variant="outline" className="text-xs">
+                      <Badge variant="outline" className="text-sm px-3 py-1">
                         {getWordCount(inputText)} words
                       </Badge>
                       <Button
@@ -447,43 +463,43 @@ export default function Paraphraser() {
                         size="icon"
                         onClick={() => handleCopy(inputText)}
                         disabled={!inputText}
-                        className="h-8 w-8"
+                        className="h-10 w-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700"
                       >
-                        <Copy className="h-4 w-4" />
+                        <Copy className="h-5 w-5" />
                       </Button>
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent>
+                <CardContent className="px-8 pb-8">
                   <Textarea
                     placeholder="Enter your text here or upload a document above to get started..."
                     value={inputText}
                     onChange={(e) => setInputText(e.target.value)}
-                    className="min-h-80 resize-none border-slate-200 dark:border-slate-600 focus-visible:ring-scholar-primary bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm text-base leading-relaxed"
+                    className="min-h-96 resize-none border-slate-200 dark:border-slate-600 focus-visible:ring-scholar-primary bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm text-base leading-relaxed p-6 rounded-xl"
                   />
-                  <div className="mt-4 flex justify-between items-center">
+                  <div className="mt-6 flex justify-between items-center">
                     <Button
                       onClick={handleClear}
                       variant="outline"
                       size="sm"
                       disabled={!inputText}
-                      className="text-slate-600 dark:text-slate-400"
+                      className="text-slate-600 dark:text-slate-400 px-6 py-2 rounded-xl"
                     >
                       Clear Text
                     </Button>
                     <Button
                       onClick={handleParaphrase}
                       disabled={!inputText.trim() || isLoading}
-                      className="scholar-gradient text-white font-semibold px-6 py-2 hover:shadow-lg transition-all duration-300"
+                      className="scholar-gradient text-white font-semibold px-8 py-3 rounded-xl hover:shadow-xl transition-all duration-300"
                     >
                       {isLoading ? (
                         <>
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
+                          <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white mr-3"></div>
                           Processing...
                         </>
                       ) : (
                         <>
-                          <Sparkles className="w-4 h-4 mr-2" />
+                          <Sparkles className="w-5 h-5 mr-3" />
                           Paraphrase Text
                         </>
                       )}
@@ -493,15 +509,17 @@ export default function Paraphraser() {
               </Card>
 
               {/* Enhanced Output Area */}
-              <Card className="shadow-lg border-0 bg-white/80 dark:bg-slate-800/80 backdrop-blur-sm">
-                <CardHeader className="pb-4">
+              <Card className="shadow-xl border-0 bg-white/90 dark:bg-slate-800/90 backdrop-blur-md rounded-2xl">
+                <CardHeader className="pb-6 px-8 pt-8">
                   <div className="flex flex-row items-center justify-between">
-                    <CardTitle className="text-lg flex items-center space-x-2">
-                      <CheckCircle className="h-5 w-5 scholar-secondary" />
-                      <span>Paraphrased Result</span>
+                    <CardTitle className="text-xl flex items-center space-x-3">
+                      <div className="p-2 bg-scholar-secondary/10 rounded-lg">
+                        <CheckCircle className="h-6 w-6 scholar-secondary" />
+                      </div>
+                      <span className="font-bold">Paraphrased Result</span>
                     </CardTitle>
                     <div className="flex items-center space-x-3">
-                      <Badge variant="outline" className="text-xs">
+                      <Badge variant="outline" className="text-sm px-3 py-1">
                         {result ? getWordCount(result.paraphrasedText) : 0} words
                       </Badge>
                       <Button
@@ -509,32 +527,32 @@ export default function Paraphraser() {
                         size="icon"
                         onClick={() => result && handleCopy(result.paraphrasedText)}
                         disabled={!result}
-                        className="h-8 w-8"
+                        className="h-10 w-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700"
                       >
-                        <Copy className="h-4 w-4" />
+                        <Copy className="h-5 w-5" />
                       </Button>
                       <Button
                         variant="ghost"
                         size="icon"
                         disabled={!result}
-                        className="h-8 w-8"
+                        className="h-10 w-10 rounded-xl hover:bg-slate-100 dark:hover:bg-slate-700"
                       >
-                        <Download className="h-4 w-4" />
+                        <Download className="h-5 w-5" />
                       </Button>
                     </div>
                   </div>
                 </CardHeader>
-                <CardContent>
-                  <div className="min-h-80 overflow-y-auto leading-relaxed bg-white/50 dark:bg-slate-700/50 backdrop-blur-sm rounded-lg border border-slate-200 dark:border-slate-600 p-4">
+                <CardContent className="px-8 pb-8">
+                  <div className="min-h-96 overflow-y-auto leading-relaxed bg-white/70 dark:bg-slate-700/70 backdrop-blur-sm rounded-xl border border-slate-200 dark:border-slate-600 p-6">
                     {isLoading ? (
-                      <div className="flex flex-col items-center justify-center h-full space-y-4">
+                      <div className="flex flex-col items-center justify-center h-full space-y-6">
                         <div className="relative">
-                          <div className="animate-spin rounded-full h-12 w-12 border-4 border-slate-200 dark:border-slate-600"></div>
-                          <div className="animate-spin rounded-full h-12 w-12 border-4 border-scholar-primary border-t-transparent absolute inset-0"></div>
+                          <div className="animate-spin rounded-full h-16 w-16 border-4 border-slate-200 dark:border-slate-600"></div>
+                          <div className="animate-spin rounded-full h-16 w-16 border-4 border-scholar-primary border-t-transparent absolute inset-0"></div>
                         </div>
                         <div className="text-center">
-                          <p className="text-lg font-medium text-slate-700 dark:text-slate-300 mb-2">AI Processing</p>
-                          <p className="text-sm text-slate-500 dark:text-slate-400">Analyzing and paraphrasing your text...</p>
+                          <p className="text-xl font-semibold text-slate-700 dark:text-slate-300 mb-3">AI Processing</p>
+                          <p className="text-base text-slate-500 dark:text-slate-400">Analyzing and paraphrasing your text...</p>
                         </div>
                       </div>
                     ) : result ? (
@@ -542,11 +560,11 @@ export default function Paraphraser() {
                         {renderHighlightedText(result.paraphrasedText, result.highlights)}
                       </div>
                     ) : (
-                      <div className="flex flex-col items-center justify-center h-full space-y-4 text-slate-500 dark:text-slate-400">
-                        <Bot className="h-16 w-16 opacity-30" />
+                      <div className="flex flex-col items-center justify-center h-full space-y-6 text-slate-500 dark:text-slate-400">
+                        <Bot className="h-20 w-20 opacity-30" />
                         <div className="text-center">
-                          <p className="text-lg font-medium mb-2">Ready for paraphrasing</p>
-                          <p className="text-sm">Your enhanced text will appear here with color-coded highlights</p>
+                          <p className="text-xl font-semibold mb-3">Ready for paraphrasing</p>
+                          <p className="text-base">Your enhanced text will appear here with color-coded highlights</p>
                         </div>
                       </div>
                     )}
@@ -557,26 +575,26 @@ export default function Paraphraser() {
 
             {/* Results Summary and Stats */}
             {result && (
-              <Card className="mt-8 shadow-lg border-0 bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 backdrop-blur-sm">
-                <CardContent className="pt-6">
-                  <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                    <div className="text-center">
-                      <div className="text-2xl font-bold scholar-primary">{result.mode}</div>
-                      <div className="text-sm text-slate-600 dark:text-slate-400">Writing Mode</div>
+              <Card className="mt-10 shadow-xl border-0 bg-gradient-to-r from-emerald-50 to-blue-50 dark:from-emerald-900/20 dark:to-blue-900/20 backdrop-blur-md rounded-2xl">
+                <CardContent className="pt-8 pb-8 px-8">
+                  <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+                    <div className="text-center p-4 bg-white/50 dark:bg-slate-800/50 rounded-xl">
+                      <div className="text-3xl font-bold scholar-primary mb-2">{result.mode.toUpperCase()}</div>
+                      <div className="text-sm font-medium text-slate-600 dark:text-slate-400">Writing Mode</div>
                     </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold scholar-secondary">{result.language}</div>
-                      <div className="text-sm text-slate-600 dark:text-slate-400">Language</div>
+                    <div className="text-center p-4 bg-white/50 dark:bg-slate-800/50 rounded-xl">
+                      <div className="text-3xl font-bold scholar-secondary mb-2">{result.language}</div>
+                      <div className="text-sm font-medium text-slate-600 dark:text-slate-400">Language</div>
                     </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold scholar-accent">{result.citationFormat}</div>
-                      <div className="text-sm text-slate-600 dark:text-slate-400">Citation Style</div>
+                    <div className="text-center p-4 bg-white/50 dark:bg-slate-800/50 rounded-xl">
+                      <div className="text-3xl font-bold scholar-accent mb-2">{result.citationFormat}</div>
+                      <div className="text-sm font-medium text-slate-600 dark:text-slate-400">Citation Style</div>
                     </div>
-                    <div className="text-center">
-                      <div className="text-2xl font-bold text-slate-700 dark:text-slate-300">
+                    <div className="text-center p-4 bg-white/50 dark:bg-slate-800/50 rounded-xl">
+                      <div className="text-3xl font-bold text-slate-700 dark:text-slate-300 mb-2">
                         {result.highlights ? result.highlights.length : 0}
                       </div>
-                      <div className="text-sm text-slate-600 dark:text-slate-400">Improvements</div>
+                      <div className="text-sm font-medium text-slate-600 dark:text-slate-400">Improvements</div>
                     </div>
                   </div>
                 </CardContent>
@@ -612,8 +630,8 @@ export default function Paraphraser() {
         </div>
 
         {/* Enhanced Footer with ScholarWriter.com Branding */}
-        <footer className="mt-16 bg-white/90 dark:bg-slate-900/90 backdrop-blur-sm border-t border-slate-200/60 dark:border-slate-700/60">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <footer className="mt-20 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200/60 dark:border-slate-700/60">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Brand Section */}
               <div className="space-y-4">

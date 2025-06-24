@@ -80,6 +80,14 @@
   body {
     @apply font-sans antialiased bg-background text-foreground;
   }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  * {
+    scroll-margin-top: 6rem;
+  }
 }
 
 @layer utilities {
