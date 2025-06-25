@@ -8,6 +8,8 @@
   "build": "vite build && esbuild server/index.ts --platform=node --packages=external --bundle --format=esm --outdir=dist",
   "check": "tsc",
   "db:push": "drizzle-kit push"
+    "vite": "^5.4.19"
+
 },
 
   "dependencies": {
